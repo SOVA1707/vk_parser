@@ -28,7 +28,7 @@ public class main {
         Friends friends = new Friends(vk);
 
 //        parsMessages(vk, user);
-        ParsDocs.parsDocs(vk, user);
+        ParsAlbums.parsAlbums(vk, user);
     }
 
 }

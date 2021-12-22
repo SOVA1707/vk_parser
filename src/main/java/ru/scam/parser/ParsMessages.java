@@ -224,7 +224,7 @@ public class ParsMessages {
         }
     }
 
-    private static List<String> getUrls(String str) {
+    public static List<String> getUrls(String str) {
         List<String> list = new ArrayList<>();
         char[] chars = str.toCharArray();
         int i = 0;
@@ -251,7 +251,7 @@ public class ParsMessages {
         return list;
     }
 
-    private static String getMaxSizeUrl(List<String> urls) {
+    public static String getMaxSizeUrl(List<String> urls) {
         int index = 0;
         int multiply = 0;
         for (int i = 0; i < urls.size(); i++) {

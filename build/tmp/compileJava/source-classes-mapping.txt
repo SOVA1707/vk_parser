@@ -1,0 +1,8 @@
+ru/scam/parser/ParsDocs.java
+ ru.scam.parser.ParsDocs
+ru/scam/parser/ParsAlbums.java
+ ru.scam.parser.ParsAlbums
+ru/scam/parser/main.java
+ ru.scam.parser.main
+ru/scam/parser/ParsMessages.java
+ ru.scam.parser.ParsMessages

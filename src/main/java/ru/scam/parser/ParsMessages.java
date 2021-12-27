@@ -36,7 +36,7 @@ public class ParsMessages {
         }
         System.out.println("Count of dialogs: " + messageIds.size());
 
-        int i = 0;
+        int i = 1;
         for (int id : messageIds) {
             System.out.println(i + ":" + id);
             if (skip < i) {

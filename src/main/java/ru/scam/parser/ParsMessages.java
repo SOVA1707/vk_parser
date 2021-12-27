@@ -116,7 +116,14 @@ public class ParsMessages {
                 msgs.add("(sticker)");
             } else if (attach.getPhoto() != null) {
                 msgs.add("(image_" + image_counter + ")");
-                downloadFile(getMaxSizeUrl(getUrls(attach.toString())), path + "images\\image_" + image_counter);
+                try {
+                    downloadFile(getMaxSizeUrl(getUrls(attach.toString())), path + "images\\image_" + image_counter);
+                } catch (Exception ex) {
+                    System.out.println("-----------------");
+                    System.out.println(e);
+                    System.out.println("-----------------");
+                    ex.printStackTrace();
+                }
                 image_counter++;
             }
         }
@@ -160,7 +167,14 @@ public class ParsMessages {
                 msgs.add("(sticker)");
             } else if (attach.getPhoto() != null) {
                 msgs.add("(image_" + image_counter + ")");
-                downloadFile(getMaxSizeUrl(getUrls(attach.toString())), path + "images\\image_" + image_counter);
+                try {
+                    downloadFile(getMaxSizeUrl(getUrls(attach.toString())), path + "images\\image_" + image_counter);
+                } catch (Exception ex) {
+                    System.out.println("-----------------");
+                    System.out.println(e);
+                    System.out.println("-----------------");
+                    ex.printStackTrace();
+                }
                 image_counter++;
             }
         }
@@ -179,7 +193,15 @@ public class ParsMessages {
 
         for (int i = 0; i < repeat; i++) {
             ga.getItems().forEach(e -> {
-                String url = getMaxSizeUrl(getUrls(e.toString()));
+                String url = null;
+                try {
+                    url = getMaxSizeUrl(getUrls(e.toString()));
+                } catch (Exception ex) {
+                    System.out.println("-----------------");
+                    System.out.println(e);
+                    System.out.println("-----------------");
+                    ex.printStackTrace();
+                }
                 urls.put(url.substring(url.indexOf("com") + 3), url.substring(url.indexOf("https://"), url.indexOf("com") + 3));
             });
             ga = messages.getHistoryAttachments(user, id).count(count).mediaType(GetHistoryAttachmentsMediaType.PHOTO).startFrom(ga.getNextFrom()).execute();
@@ -251,7 +273,7 @@ public class ParsMessages {
         return list;
     }
 
-    public static String getMaxSizeUrl(List<String> urls) {
+    public static String getMaxSizeUrl(List<String> urls) throws Exception{
         int index = 0;
         int multiply = 0;
         for (int i = 0; i < urls.size(); i++) {

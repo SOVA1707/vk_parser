@@ -3,6 +3,8 @@ package ru.scam.parser;
 import com.vk.api.sdk.actions.Photos;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
+import com.vk.api.sdk.exceptions.ApiException;
+import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.photos.Photo;
 import com.vk.api.sdk.objects.photos.PhotoAlbumFull;
 import com.vk.api.sdk.objects.photos.responses.GetResponse;
@@ -18,7 +20,7 @@ public class ParsAlbums {
     final static String folder_path = main.folder_path;
     static int counter = 1;
 
-    public static void parsAlbums(VkApiClient vk, UserActor user) throws Exception{
+    public static void parsAlbums(VkApiClient vk, UserActor user) throws ClientException, ApiException {
         Photos photos = new Photos(vk);
         List<PhotoAlbumFull> albums = photos.getAlbums(user).needSystem(true).execute().getItems();
         for (PhotoAlbumFull album : albums) {
@@ -28,7 +30,14 @@ public class ParsAlbums {
                 GetResponse phtos = photos.get(user).albumId(String.valueOf(album.getId())).offset(i*count).count(count).execute();
                 if (phtos.getItems().size() == 0) break;
                 for (Photo p : phtos.getItems()) {
-                    ParsMessages.downloadFile(ParsMessages.getMaxSizeUrl(ParsMessages.getUrls(p.toString())), path + "image_" + counter);
+                    try {
+                        ParsMessages.downloadFile(ParsMessages.getMaxSizeUrl(ParsMessages.getUrls(p.toString())), path + "image_" + counter);
+                    } catch (Exception e) {
+                        System.out.println("-----------------");
+                        System.out.println(p);
+                        System.out.println("-----------------");
+                        e.printStackTrace();
+                    }
                     counter++;
                 }
             }

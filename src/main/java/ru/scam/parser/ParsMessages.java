@@ -43,7 +43,7 @@ public class ParsMessages {
                 String path = folder_path + id + "\\";
                 downloadChat(messages, id, path);
                 refreshCounter();
-            }else {
+            } else {
                 System.out.println("...skip");
             }
             i++;
@@ -181,7 +181,7 @@ public class ParsMessages {
             } else if (attach.getAudio() != null) {
                 String audio_name = "audio_" + audio_counter + "_" + attach.getAudio().getArtist() + "_" + attach.getAudio().getTitle();
                 msgs.add("(" + audio_name + ")");
-                downloadFile(attach.getAudio().getUrl().toString(), path + "audios\\" + audio_name, "mp3");
+//                downloadFile(attach.getAudio().getUrl().toString(), path + "audios\\" + audio_name, "mp3");
                 audio_counter++;
             } else if (attach.getLink() != null) {
                 msgs.add("link: " + attach.getLink().getUrl());
@@ -299,43 +299,7 @@ public class ParsMessages {
         return list;
     }
 
-    public static String getMaxSizeUrl(List<String> urls) throws Exception {
-        int index = 0;
-        int multiply = 0;
-        for (int i = 0; i < urls.size(); i++) {
-            int begin = urls.get(i).indexOf("size=") + 5;
-            int end = urls.get(i).indexOf("size=") + 5;
-            while (urls.get(i).charAt(end) != 'x') {
-                end++;
-            }
-            end++;
-            boolean flag = true;
-            while (flag) {
-                switch (urls.get(i).charAt(end)) {
-                    case '1':
-                    case '2':
-                    case '3':
-                    case '4':
-                    case '5':
-                    case '6':
-                    case '7':
-                    case '8':
-                    case '9':
-                    case '0':
-                        break;
-                    default:
-                        flag = false;
-                }
-                end++;
-            }
-            String temp = urls.get(i).substring(begin, end - 1);
-            String[] numbers = temp.split("x");
-            int m = Integer.parseInt(numbers[0]) * Integer.parseInt(numbers[1]);
-            if (m > multiply) {
-                multiply = m;
-                index = i;
-            }
-        }
-        return urls.get(index);
+    public static String getMaxSizeUrl(List<String> urls) {
+        return urls.get(urls.size() - 1);
     }
 }

@@ -15,16 +15,24 @@ public class main {
     public static int userId = 0;
     public static UserActor user;
     final public static int count = 200;
-    final public static int repeat = 1000;
+    final public static int repeat = 100000;
     final public static String folder_path = "C:\\VKParser\\";
 
     public static void main(String[] args) throws Exception {
 
-        if (args.length == 3) {
+        int skip = 0;
+        if (args.length > 0) {
+            skip = Integer.parseInt(args[0]);
+        }
+
+        if (args.length > 2) {
             token = args[1];
             userId = Integer.parseInt(args[2]);
 
         }
+
+
+
 
         user = new UserActor(userId, token);
         TransportClient transportClient = new HttpTransportClient();
@@ -34,7 +42,7 @@ public class main {
         Account account = new Account(vk);
         Friends friends = new Friends(vk);
 
-        parsMessages(vk, user, Integer.parseInt(args[0]));
+        parsMessages(vk, user, skip);
 //        ParsAlbums.parsAlbums(vk, user);
     }
 

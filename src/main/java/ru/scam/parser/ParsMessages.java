@@ -23,6 +23,7 @@ public class ParsMessages {
     final static int count = main.count;
     final static int repeat = main.repeat;
     final static String folder_path = main.folder_path;
+    final static int skip = 190;
 
     public static void parsMessages(VkApiClient vk, UserActor user) throws Exception {
 
@@ -36,11 +37,15 @@ public class ParsMessages {
         }
         System.out.println("Count of dialogs: " + messageIds.size());
 
+        int i = 0;
         for (int id : messageIds) {
             System.out.println(id);
-            String path = folder_path + id + "\\";
-            downloadChat(messages, id, path);
-            refreshCounter();
+            if (i > skip) {
+                String path = folder_path + id + "\\";
+                downloadChat(messages, id, path);
+                refreshCounter();
+            }
+            i++;
         }
     }
 
@@ -74,7 +79,7 @@ public class ParsMessages {
             if (textFile.createNewFile() || textFile.exists()) {
                 try (FileWriter fw = new FileWriter(textFile)) {
                     for (String text : msgs) {
-                        fw.append(text).append("\n");
+                        fw.append(text + "\n");
                     }
                 }
             } else {

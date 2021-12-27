@@ -23,7 +23,7 @@ public class ParsMessages {
     final static int count = main.count;
     final static int repeat = main.repeat;
     final static String folder_path = main.folder_path;
-    final static int skip = 190;
+    final static int skip = 0;
 
     public static void parsMessages(VkApiClient vk, UserActor user) throws Exception {
 
@@ -40,7 +40,7 @@ public class ParsMessages {
         int i = 0;
         for (int id : messageIds) {
             System.out.println(id);
-            if (i > skip) {
+            if (skip < i) {
                 String path = folder_path + id + "\\";
                 downloadChat(messages, id, path);
                 refreshCounter();
@@ -67,6 +67,7 @@ public class ParsMessages {
 
     private static void downloadChat(Messages messages, int id, String path) throws Exception {
         List<String> msgs = new ArrayList<>();
+        msgs.add("---Конец чата---");
         for (int i = 0; i < repeat; i++) {
             GetHistoryResponse g = messages.getHistory(user).peerId(id).count(count).offset(i * count).execute();
             if (g.getItems().size() == 0) break;
@@ -74,18 +75,22 @@ public class ParsMessages {
                 downloadMessage(msgs, e, path);
             }
         }
+        msgs.add("---Начало чата---");
         try {
             File textFile = new File(path + "chatText.txt");
+            FileUtils.touch(textFile);
             if (textFile.createNewFile() || textFile.exists()) {
                 try (FileWriter fw = new FileWriter(textFile)) {
                     for (String text : msgs) {
-                        fw.append(text + "\n");
+                        fw.append(text).append("\n");
                     }
                 }
             } else {
                 throw new Exception("File cannot create. " + path + "chatText.txt");
             }
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            System.out.println("SOMETHING WRONG");
+            e.printStackTrace();
         }
     }
 
@@ -113,7 +118,7 @@ public class ParsMessages {
             } else if (attach.getAudio() != null) {
                 String audio_name = "audio_" + audio_counter + "_" + attach.getAudio().getArtist() + "_" + attach.getAudio().getTitle();
                 msgs.add("(" + audio_name + ")");
-                downloadFile(attach.getAudio().getUrl().toString(), path + "audios\\" + audio_name, "mp3");
+//                downloadFile(attach.getAudio().getUrl().toString(), path + "audios\\" + audio_name, "mp3");
                 audio_counter++;
             } else if (attach.getLink() != null) {
                 msgs.add("link: " + attach.getLink().getUrl());

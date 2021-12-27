@@ -1,7 +1,11 @@
 plugins {
     id 'application'
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.1'
 }
+
+apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
 
 group 'ru.scam.parser'
 version '1.0-SNAPSHOT'
@@ -12,16 +16,20 @@ repositories {
     mavenCentral()
 }
 
+shadowJar {
+    setArchivesBaseName('main')
+}
+
 applicationDefaultJvmArgs = ['-Dfile.encoding=UTF-8', '-Djava.util.logging.config.file=logging.properties']
 
 dependencies {
 
     //Binding for Log4J -->
-    compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.11.2'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.11.2'
 
     //Log4j API and Core implementation required for binding
-    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.2'
-    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.2'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.2'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.2'
     // https://mvnrepository.com/artifact/com.yahoo.vespa/container-apache-http-client-bundle
     compileOnly group: 'com.yahoo.vespa', name: 'container-apache-http-client-bundle', version: '7.513.4'
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3

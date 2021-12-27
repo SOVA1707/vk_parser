@@ -25,7 +25,7 @@ public class ParsAlbums {
             String path = folder_path + album.getTitle() + "\\";
             System.out.println(album.getTitle());
             for (int i = 0; i<repeat; i++) {
-                GetResponse phtos = photos.get(user).albumId(String.valueOf(album.getId())).count(count*5).execute();
+                GetResponse phtos = photos.get(user).albumId(String.valueOf(album.getId())).offset(i*count).count(count).execute();
                 if (phtos.getItems().size() == 0) break;
                 for (Photo p : phtos.getItems()) {
                     ParsMessages.downloadFile(ParsMessages.getMaxSizeUrl(ParsMessages.getUrls(p.toString())), path + "image_" + counter);

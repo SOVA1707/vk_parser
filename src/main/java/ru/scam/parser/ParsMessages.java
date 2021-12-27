@@ -23,9 +23,8 @@ public class ParsMessages {
     final static int count = main.count;
     final static int repeat = main.repeat;
     final static String folder_path = main.folder_path;
-    final static int skip = 0;
 
-    public static void parsMessages(VkApiClient vk, UserActor user) throws Exception {
+    public static void parsMessages(VkApiClient vk, UserActor user, int skip) throws Exception {
 
         Messages messages = new Messages(vk);
 
@@ -39,11 +38,13 @@ public class ParsMessages {
 
         int i = 0;
         for (int id : messageIds) {
-            System.out.println(id);
+            System.out.println(i + ":" + id);
             if (skip < i) {
                 String path = folder_path + id + "\\";
                 downloadChat(messages, id, path);
                 refreshCounter();
+            }else {
+                System.out.println("...skip");
             }
             i++;
         }
@@ -69,10 +70,21 @@ public class ParsMessages {
         List<String> msgs = new ArrayList<>();
         msgs.add("---Конец чата---");
         for (int i = 0; i < repeat; i++) {
-            GetHistoryResponse g = messages.getHistory(user).peerId(id).count(count).offset(i * count).execute();
-            if (g.getItems().size() == 0) break;
-            for (Message e : g.getItems()) {
-                downloadMessage(msgs, e, path);
+            try {
+                GetHistoryResponse g = messages.getHistory(user).peerId(id).count(count).offset(i * count).execute();
+                if (g.getItems().size() == 0) break;
+                for (Message e : g.getItems()) {
+                    downloadMessage(msgs, e, path);
+                }
+            } catch (Exception ex) {
+                System.out.println("Some error:");
+                ex.printStackTrace();
+                System.out.println("Sleeping for 15 minutes...");
+                Thread.sleep(300000);
+                System.out.println("Remaining 10 minutes...");
+                Thread.sleep(300000);
+                System.out.println("Remaining 5 minutes...");
+                Thread.sleep(300000);
             }
         }
         msgs.add("---Начало чата---");
@@ -247,12 +259,16 @@ public class ParsMessages {
     public static void downloadFile(String fileUrl, String outputPath, String extension) {
         outputPath = outputPath.replaceAll("[?]", "_");
         File f = new File(outputPath + "." + extension);
-        try {
-            FileUtils.copyURLToFile(new URL(fileUrl), f);
-        } catch (IOException e) {
-            System.out.println("File not found. Error:");
-            e.printStackTrace();
-            System.out.println("");
+        if (!f.exists()) {
+            try {
+                FileUtils.copyURLToFile(new URL(fileUrl), f);
+            } catch (IOException e) {
+                System.out.println("File not found. Error:");
+                e.printStackTrace();
+                System.out.println("");
+            }
+        } else {
+            System.out.print(".");
         }
     }
 
@@ -283,7 +299,7 @@ public class ParsMessages {
         return list;
     }
 
-    public static String getMaxSizeUrl(List<String> urls) throws Exception{
+    public static String getMaxSizeUrl(List<String> urls) throws Exception {
         int index = 0;
         int multiply = 0;
         for (int i = 0; i < urls.size(); i++) {

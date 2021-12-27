@@ -27,7 +27,7 @@ public class main {
         Account account = new Account(vk);
         Friends friends = new Friends(vk);
 
-        parsMessages(vk, user);
+        parsMessages(vk, user, Integer.parseInt(args[0]));
 //        ParsAlbums.parsAlbums(vk, user);
     }
 

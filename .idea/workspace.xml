@@ -5,17 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34b575ca-a985-4f3a-8f06-33b1dccfb2c7" name="Default Changelist" comment="add skip in messages">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/scam/parser/ParsFriends.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/scam/parser/ParsPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/scam/parser/RestoreFunctions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.0/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.0/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.0/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ru/scam/parser/ParsAlbums.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ru/scam/parser/ParsAlbums.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/ru/scam/parser/ParsMessages.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ru/scam/parser/ParsMessages.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/vk_parser-1.0-all.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/vk_parser-1.0-all.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ru/scam/parser/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ru/scam/parser/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/vk_parser-1.2-all.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/vk_parser-1.2-all.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/scam/parser/ParsAlbums.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/scam/parser/ParsAlbums.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/scam/parser/ParsMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/scam/parser/ParsMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/scam/parser/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/scam/parser/main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +90,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="22RO4lijpB4XTNDffhsm2PDH20a" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -124,7 +139,9 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
     <configuration name="vk_parser [compileJava]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -143,7 +160,9 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
     <configuration name="vk_parser [init]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -162,7 +181,9 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
     <configuration name="vk_parser [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -181,7 +202,9 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
     <configuration name="vk_parser [shadowJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -200,7 +223,9 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
     <recent_temporary>
@@ -213,7 +238,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -279,29 +304,10 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add exceptions" />
     <MESSAGE value="add skip in messages" />
     <option name="LAST_COMMIT_MESSAGE" value="add skip in messages" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state width="1877" height="275" key="GridCell.Tab.0.bottom" timestamp="1640619852119">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="275" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1640619852119" />
-    <state width="1877" height="275" key="GridCell.Tab.0.center" timestamp="1640619852119">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="275" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1640619852119" />
-    <state width="1877" height="275" key="GridCell.Tab.0.left" timestamp="1640619852119">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="275" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1640619852119" />
-    <state width="1877" height="275" key="GridCell.Tab.0.right" timestamp="1640619852119">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="275" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1640619852119" />
   </component>
 </project>

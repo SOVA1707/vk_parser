@@ -17,12 +17,16 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ParsMessages {
-    public static String token = main.token;
-    public static int userId = main.userId;
-    public static UserActor user = main.user;
+    final static UserActor user = main.user;
     final static int count = main.count;
     final static int repeat = main.repeat;
-    final static String folder_path = main.folder_path;
+    final static String folder_path = main.folder_path + "chats\\";
+    public static String download_images = "1";
+    public static String download_audio = "1";
+    public static String download_audio_message = "1";
+    public static String download_video = "1";
+    public static String download_document = "1";
+
 
     public static void parsMessages(VkApiClient vk, UserActor user, int skip) throws Exception {
 
@@ -85,6 +89,8 @@ public class ParsMessages {
                 Thread.sleep(300000);
                 System.out.println("Remaining 5 minutes...");
                 Thread.sleep(300000);
+                System.out.println("Repeat...");
+                i--;
             }
         }
         msgs.add("---Начало чата---");
@@ -114,15 +120,19 @@ public class ParsMessages {
         for (MessageAttachment attach : e.getAttachments()) {
             if (attach.getDoc() != null) {
                 msgs.add("(document_" + doc_counter + "_" + attach.getDoc().getTitle() + ")");
-                downloadFile(attach.getDoc().getUrl().toString(), path + "documents\\document_" + doc_counter + "_" + attach.getDoc().getTitle(), attach.getDoc().getExt());
+                if (download_document.equals("1"))
+                    downloadFile(attach.getDoc().getUrl().toString(), path + "documents\\document_" + doc_counter + "_" + attach.getDoc().getTitle(), "");
                 doc_counter++;
             } else if (attach.getVideo() != null) {
                 String video_name = "video_" + video_counter + "_" + attach.getVideo().getTitle();
                 msgs.add("(" + video_name + ")");
                 msgs.add("link: " + attach.getVideo().getPlayer());
+                if (download_video.equals("1"))
+                    downloadFile(attach.getVideo().getPlayer().toString(), path + "videos\\" + video_name, ".mp3");
             } else if (attach.getAudioMessage() != null) {
                 msgs.add("(audio_message_" + audio_message_counter + ")");
-                downloadFile(attach.getAudioMessage().getLinkMp3().toString(), path + "audio_messages\\audio_message_" + audio_message_counter, "mp3");
+                if (download_audio_message.equals("1"))
+                    downloadFile(attach.getAudioMessage().getLinkMp3().toString(), path + "audio_messages\\audio_message_" + audio_message_counter, "mp3");
                 audio_message_counter++;
             } else if (attach.getCall() != null) {
                 msgs.add("(call_" + call_counter + "_duration:" + attach.getCall().getDuration() + "_initiatorId:" + attach.getCall().getInitiatorId() + "_receiverId:" + attach.getCall().getReceiverId() + ")");
@@ -130,7 +140,8 @@ public class ParsMessages {
             } else if (attach.getAudio() != null) {
                 String audio_name = "audio_" + audio_counter + "_" + attach.getAudio().getArtist() + "_" + attach.getAudio().getTitle();
                 msgs.add("(" + audio_name + ")");
-//                downloadFile(attach.getAudio().getUrl().toString(), path + "audios\\" + audio_name, "mp3");
+                if (download_audio.equals("1"))
+                    downloadFile(attach.getAudio().getUrl().toString(), path + "audios\\" + audio_name, "mp3");
                 audio_counter++;
             } else if (attach.getLink() != null) {
                 msgs.add("link: " + attach.getLink().getUrl());
@@ -138,14 +149,8 @@ public class ParsMessages {
                 msgs.add("(sticker)");
             } else if (attach.getPhoto() != null) {
                 msgs.add("(image_" + image_counter + ")");
-                try {
+                if (download_images.equals("1"))
                     downloadFile(getMaxSizeUrl(getUrls(attach.toString())), path + "images\\image_" + image_counter);
-                } catch (Exception ex) {
-                    System.out.println("-----------------");
-                    System.out.println(e);
-                    System.out.println("-----------------");
-                    ex.printStackTrace();
-                }
                 image_counter++;
             }
         }
@@ -165,15 +170,19 @@ public class ParsMessages {
         for (MessageAttachment attach : e.getAttachments()) {
             if (attach.getDoc() != null) {
                 msgs.add("(document_" + doc_counter + "_" + attach.getDoc().getTitle() + ")");
-                downloadFile(attach.getDoc().getUrl().toString(), path + "documents\\document_" + doc_counter + "_" + attach.getDoc().getTitle(), attach.getDoc().getExt());
+                if (download_document.equals("1"))
+                    downloadFile(attach.getDoc().getUrl().toString(), path + "documents\\document_" + doc_counter + "_" + attach.getDoc().getTitle(), "");
                 doc_counter++;
             } else if (attach.getVideo() != null) {
                 String video_name = "video_" + video_counter + "_" + attach.getVideo().getTitle();
                 msgs.add("(" + video_name + ")");
                 msgs.add("link: " + attach.getVideo().getPlayer());
+                if (download_video.equals("1"))
+                    downloadFile(attach.getVideo().getPlayer().toString(), path + "videos\\" + video_name, ".mp3");
             } else if (attach.getAudioMessage() != null) {
                 msgs.add("(audio_message_" + audio_message_counter + ")");
-                downloadFile(attach.getAudioMessage().getLinkMp3().toString(), path + "audio_messages\\audio_message_" + audio_message_counter, "mp3");
+                if (download_audio_message.equals("1"))
+                    downloadFile(attach.getAudioMessage().getLinkMp3().toString(), path + "audio_messages\\audio_message_" + audio_message_counter, "mp3");
                 audio_message_counter++;
             } else if (attach.getCall() != null) {
                 msgs.add("(call_" + call_counter + "_duration:" + attach.getCall().getDuration() + "_initiatorId:" + attach.getCall().getInitiatorId() + "_receiverId:" + attach.getCall().getReceiverId() + ")");
@@ -181,7 +190,8 @@ public class ParsMessages {
             } else if (attach.getAudio() != null) {
                 String audio_name = "audio_" + audio_counter + "_" + attach.getAudio().getArtist() + "_" + attach.getAudio().getTitle();
                 msgs.add("(" + audio_name + ")");
-//                downloadFile(attach.getAudio().getUrl().toString(), path + "audios\\" + audio_name, "mp3");
+                if (download_audio.equals("1"))
+                    downloadFile(attach.getAudio().getUrl().toString(), path + "audios\\" + audio_name, "mp3");
                 audio_counter++;
             } else if (attach.getLink() != null) {
                 msgs.add("link: " + attach.getLink().getUrl());
@@ -189,14 +199,8 @@ public class ParsMessages {
                 msgs.add("(sticker)");
             } else if (attach.getPhoto() != null) {
                 msgs.add("(image_" + image_counter + ")");
-                try {
+                if (download_images.equals("1"))
                     downloadFile(getMaxSizeUrl(getUrls(attach.toString())), path + "images\\image_" + image_counter);
-                } catch (Exception ex) {
-                    System.out.println("-----------------");
-                    System.out.println(e);
-                    System.out.println("-----------------");
-                    ex.printStackTrace();
-                }
                 image_counter++;
             }
         }
@@ -206,35 +210,6 @@ public class ParsMessages {
                 downloadMessage(msgs, m, path);
                 msgs.add("<---");
             }
-    }
-
-    private static void downloadImages(Messages messages, int id, String path) throws Exception {
-        GetHistoryAttachmentsResponse ga = messages.getHistoryAttachments(user, id).count(count).mediaType(GetHistoryAttachmentsMediaType.PHOTO).execute();
-
-        Map<String, String> urls = new HashMap<>();
-
-        for (int i = 0; i < repeat; i++) {
-            ga.getItems().forEach(e -> {
-                String url = null;
-                try {
-                    url = getMaxSizeUrl(getUrls(e.toString()));
-                } catch (Exception ex) {
-                    System.out.println("-----------------");
-                    System.out.println(e);
-                    System.out.println("-----------------");
-                    ex.printStackTrace();
-                }
-                urls.put(url.substring(url.indexOf("com") + 3), url.substring(url.indexOf("https://"), url.indexOf("com") + 3));
-            });
-            ga = messages.getHistoryAttachments(user, id).count(count).mediaType(GetHistoryAttachmentsMediaType.PHOTO).startFrom(ga.getNextFrom()).execute();
-        }
-
-        int counter = 0;
-        System.out.println(urls.size());
-        for (Map.Entry<String, String> url : urls.entrySet()) {
-            counter++;
-            downloadFile(url.getValue() + url.getKey(), path + "image_" + counter);
-        }
     }
 
     public static void downloadFile(String fileUrl, String outputPath) {
@@ -263,9 +238,7 @@ public class ParsMessages {
             try {
                 FileUtils.copyURLToFile(new URL(fileUrl), f);
             } catch (IOException e) {
-                System.out.println("File not found. Error:");
-                e.printStackTrace();
-                System.out.println("");
+                System.out.println("File not found: " + fileUrl);
             }
         } else {
             System.out.print(".");

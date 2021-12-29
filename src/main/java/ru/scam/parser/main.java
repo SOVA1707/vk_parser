@@ -1,13 +1,10 @@
 package ru.scam.parser;
 
-import com.vk.api.sdk.actions.Account;
-import com.vk.api.sdk.actions.Friends;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
 
-import static ru.scam.parser.ParsMessages.parsMessages;
 
 public class main {
 
@@ -37,9 +34,9 @@ public class main {
         TransportClient transportClient = new HttpTransportClient();
         vk = new VkApiClient(transportClient);
 
-//        parsMessages(skip);
-//        ParsAlbums.parsAlbums();
-//        ParsPage.parsUserPage();
-//        ParsFriends.parseFriends();
+        ParsMessages.parsMessages(skip);
+        ParsAlbums.parsAlbums();
+        ParsPage.parsUserPage();
+        ParsFriends.parseFriends();
     }
 }

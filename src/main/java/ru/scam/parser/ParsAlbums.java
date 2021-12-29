@@ -40,7 +40,7 @@ public class ParsAlbums {
                         System.out.println("Request error.");
                         System.out.println("Album title: " + album.getTitle());
                         System.out.println("Album id: " + album.getId());
-                        break;
+                        i = repeat;
                     } catch (ClientException | ApiException e) {
                         e.printStackTrace();
                     }

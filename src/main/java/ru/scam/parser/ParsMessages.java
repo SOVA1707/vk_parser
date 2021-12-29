@@ -24,9 +24,9 @@ public class ParsMessages {
     final static int repeat = main.repeat;
     final static String folder_path = main.folder_path + "chats\\";
     public static String download_images = "1";
-    public static String download_audio = "1";
+    public static String download_audio = "0";
     public static String download_audio_message = "1";
-    public static String download_video = "1";
+    public static String download_video = "0";
     public static String download_document = "1";
 
 

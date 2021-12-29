@@ -3,8 +3,9 @@ package ru.scam.parser;
 import com.vk.api.sdk.actions.Messages;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
+import com.vk.api.sdk.exceptions.ApiException;
+import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.messages.*;
-import com.vk.api.sdk.objects.messages.responses.GetHistoryAttachmentsResponse;
 import com.vk.api.sdk.objects.messages.responses.GetHistoryResponse;
 import org.apache.commons.io.FileUtils;
 
@@ -17,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ParsMessages {
+    final static VkApiClient vk = main.vk;
     final static UserActor user = main.user;
     final static int count = main.count;
     final static int repeat = main.repeat;
@@ -28,30 +30,39 @@ public class ParsMessages {
     public static String download_document = "1";
 
 
-    public static void parsMessages(VkApiClient vk, UserActor user, int skip) throws Exception {
+    public static void parsMessages(int skip){
 
         Messages messages = new Messages(vk);
 
         Set<Integer> messageIds = new HashSet<>();
         for (int i = 0; i < repeat; i++) {
-            List<ConversationWithMessage> gg = messages.getConversations(user).offset(i * count).count(count).execute().getItems();
-            gg.forEach(e -> messageIds.add(e.getConversation().getPeer().getId()));
-            if (gg.size() == 0) break;
+            try {
+                List<ConversationWithMessage> gg = messages.getConversations(user).offset(i * count).count(count).execute().getItems();
+                gg.forEach(e -> messageIds.add(e.getConversation().getPeer().getId()));
+                if (gg.size() == 0) break;
+            } catch (ApiException | ClientException e) {
+                System.out.println("Error 801...");
+                e.printStackTrace();
+                i--;
+            }
         }
+        System.out.println("---Parse messages---");
         System.out.println("Count of dialogs: " + messageIds.size());
 
         int i = 1;
         for (int id : messageIds) {
-            System.out.println(i + ":" + id);
+            System.out.print(i + "\t " + id);
             if (skip < i) {
                 String path = folder_path + id + "\\";
                 downloadChat(messages, id, path);
                 refreshCounter();
+                System.out.println("...done");
             } else {
                 System.out.println("...skip");
             }
             i++;
         }
+        System.out.println("---End parse messages---");
     }
 
     static int image_counter = 1;
@@ -70,7 +81,7 @@ public class ParsMessages {
         call_counter = 1;
     }
 
-    private static void downloadChat(Messages messages, int id, String path) throws Exception {
+    private static void downloadChat(Messages messages, int id, String path){
         List<String> msgs = new ArrayList<>();
         msgs.add("---Конец чата---");
         for (int i = 0; i < repeat; i++) {
@@ -83,13 +94,7 @@ public class ParsMessages {
             } catch (Exception ex) {
                 System.out.println("Some error:");
                 ex.printStackTrace();
-                System.out.println("Sleeping for 15 minutes...");
-                Thread.sleep(300000);
-                System.out.println("Remaining 10 minutes...");
-                Thread.sleep(300000);
-                System.out.println("Remaining 5 minutes...");
-                Thread.sleep(300000);
-                System.out.println("Repeat...");
+                smallSleep();
                 i--;
             }
         }
@@ -270,6 +275,32 @@ public class ParsMessages {
             i++;
         }
         return list;
+    }
+
+    public static void sleep() {
+        try {
+            System.out.println("Sleeping for 15 minutes...");
+            Thread.sleep(300000);
+            System.out.println("Remaining 10 minutes...");
+            Thread.sleep(300000);
+            System.out.println("Remaining 5 minutes...");
+            Thread.sleep(300000);
+            System.out.println("Repeat...");
+        } catch (InterruptedException e) {
+            System.out.println("Thread sleep error");
+            e.printStackTrace();
+        }
+    }
+
+    public static void smallSleep() {
+        try {
+            System.out.println("Sleeping for 5 minutes...");
+            Thread.sleep(300000);
+            System.out.println("Repeat...");
+        } catch (InterruptedException e) {
+            System.out.println("Thread sleep error");
+            e.printStackTrace();
+        }
     }
 
     public static String getMaxSizeUrl(List<String> urls) {

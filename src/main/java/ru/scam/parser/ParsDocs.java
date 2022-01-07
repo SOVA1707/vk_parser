@@ -14,12 +14,11 @@ public class ParsDocs {
 
     public static void parsDocs(){
         Docs docs = new Docs(vk);
+        System.out.println("---Parse docs---");
         try {
             for (Doc doc : docs.get(user).execute().getItems()) {
-                System.out.println("---Parse docs---");
                 System.out.println(doc.getTitle());
                 ParsMessages.downloadFile(doc.getUrl().toString(), folder_path + doc.getTitle(), "");
-                System.out.println("---End parse docs---");
             }
         } catch (ApiException | ClientException e) {
             System.out.println("Error 1982...");
@@ -27,5 +26,6 @@ public class ParsDocs {
             ParsMessages.sleep();
             parsDocs();
         }
+        System.out.println("---End parse docs---");
     }
 }

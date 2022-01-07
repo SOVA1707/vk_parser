@@ -14,7 +14,7 @@ public class main {
     public static UserActor user;
     public static VkApiClient vk;
     final public static int count = 200;
-    final public static int repeat = 100000;
+    final public static int repeat = 1000000;
     final public static String folder_path = "C:\\VKParser\\";
     public static int skip = 0;
 
@@ -31,12 +31,18 @@ public class main {
         }
 
         user = new UserActor(userId, token);
+
         TransportClient transportClient = new HttpTransportClient();
         vk = new VkApiClient(transportClient);
 
         ParsMessages.parsMessages(skip);
         ParsAlbums.parsAlbums();
-        ParsPage.parsUserPage();
+        System.out.println("---Parse current user page---");
+        ParsPage.parseUser(folder_path, String.valueOf(userId));
+        System.out.println("---End parse current user page---");
+        System.out.println("---Parse friends info---");
         ParsFriends.parseFriends();
+        System.out.println("---End parse friends---");
+        ParsDocs.parsDocs();
     }
 }

@@ -1,69 +1,72 @@
 package ru.scam.parser;
 
-import com.vk.api.sdk.actions.Account;
+import com.vk.api.sdk.actions.Users;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
-import com.vk.api.sdk.objects.account.responses.GetProfileInfoResponse;
-import org.apache.commons.io.FileUtils;
+import com.vk.api.sdk.objects.users.Fields;
+import com.vk.api.sdk.objects.users.responses.GetResponse;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ParsPage {
     final static VkApiClient vk = main.vk;
     final static UserActor user = main.user;
-    final static String folder_path = main.folder_path;
 
-    public static void parsUserPage() {
-        Account account = new Account(vk);
-        try {
-            GetProfileInfoResponse r2 = account.getProfileInfo(user).execute();
-
-            System.out.println("---Parse user page---");
-
-            List<String> text = new ArrayList<>();
-            text.add(r2.getFirstName() + " " + r2.getLastName());
-            text.add("(" + r2.getScreenName() + ")");
-            text.add("День Рождения: " + r2.getBdate());
-            text.add("Статус: " + r2.getStatus());
-            text.add("Пол: " + r2.getSex().name());
-            text.add("Телефон: " + r2.getPhone());
-            text.add("Страна: " + r2.getCountry().getTitle());
-            text.add("Город: " + r2.getCity().getTitle());
-            text.add("Родной город: " + r2.getHomeTown());
-
-            String path = folder_path + r2.getFirstName() + " " + r2.getLastName();
-
-        try {
-            File textFile = new File(path + ".txt");
-            FileUtils.touch(textFile);
-            if (textFile.createNewFile() || textFile.exists()) {
-                try (FileWriter fw = new FileWriter(textFile)) {
-                    for (String s : text) {
-                        fw.append(s).append("\n");
-                    }
-                }
-            } else {
-                throw new Exception("Can't create file. " + path + ".txt");
-            }
-        } catch (Exception e) {
-            System.out.println("SOMETHING WRONG");
-            e.printStackTrace();
-        }
-            System.out.println("---End parse user page---");
-        } catch (ApiException | ClientException e) {
-            System.out.println("Error 14...");
-            e.printStackTrace();
-            ParsMessages.sleep();
+    public static void parseUser(String path, String id) {
+        List<Fields> fields = new ArrayList<>();
+        for (Fields str : Fields.values()) {
+            String s = str.name();
+            fields.add(Fields.valueOf(str.name()));
         }
 
+        parse(path, id, fields);
     }
 
-    public static void ParsUser() {
+    private static void parse(String path, String id, List<Fields> fields) {
+        Users users = new Users(vk);
 
+        try {
+            List<GetResponse> g = users.get(user).userIds(id).fields(fields).execute();
+            List<String> list = new ArrayList<>();
+            for (GetResponse r : g) {
+                String path2 = path + r.getFirstName() + " " + r.getLastName();
+                if (r.getFirstName() != null && r.getLastName() != null)
+                    list.add(r.getFirstName() + " " + r.getLastName());
+                if (r.getNickname() != null) list.add("(" + r.getScreenName() + ")");
+                if (r.getId() != null) list.add("Id: " + r.getId());
+                if (r.getBdate() != null) list.add("Birthday: " + r.getBdate());
+                if (r.getStatus() != null) list.add("Status: " + r.getStatus());
+                if (r.getSex() != null) list.add("Sex: " + r.getSex().name());
+                if (r.getMobilePhone() != null) list.add("Phone: " + r.getMobilePhone());
+                if (r.getHomePhone() != null) list.add("Home Phone: " + r.getHomePhone());
+                if (r.getCountry() != null) list.add("Country: " + r.getCountry().getTitle());
+                if (r.getCity() != null) list.add("City: " + r.getCity().getTitle());
+                if (r.getHomeTown() != null) list.add("Home town: " + r.getHomeTown());
+                if (r.getAbout() != null) list.add("About: " + r.getAbout());
+                if (r.getEmail() != null) list.add("Email: " + r.getEmail());
+                if (r.getInstagram() != null) list.add("Instagram: " + r.getInstagram());
+                if (r.getFacebook() != null) list.add("Facebook: " + r.getFacebook());
+                if (r.getTwitter() != null) list.add("Twitter: " + r.getTwitter());
+                if (r.getSkype() != null) list.add("Skype: " + r.getSkype());
+                if (r.getSite() != null) list.add("Site: " + r.getSite());
+
+                list.add("-------------\n");
+
+                ParsMessages.writeText(path2, list);
+            }
+
+        } catch (ApiException | ClientException e) {
+            System.out.println("Error 209...");
+            String text = e.getMessage();
+            if (text.contains("but was")) {
+                String remove = text.substring(text.indexOf("$[0].") + 5).toUpperCase();
+                System.out.println(remove);
+                fields.remove(Fields.valueOf(remove));
+                parse(path, id, fields);
+            }
+        }
     }
 }

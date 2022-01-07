@@ -24,9 +24,9 @@ public class ParsMessages {
     final static int repeat = main.repeat;
     final static String folder_path = main.folder_path + "chats\\";
     public static String download_images = "1";
+    public static String download_video = "0";
     public static String download_audio = "0";
     public static String download_audio_message = "1";
-    public static String download_video = "0";
     public static String download_document = "1";
 
 
@@ -81,9 +81,9 @@ public class ParsMessages {
         call_counter = 1;
     }
 
-    private static void downloadChat(Messages messages, int id, String path){
+    public static void downloadChat(Messages messages, int id, String path){
         List<String> msgs = new ArrayList<>();
-        msgs.add("---Конец чата---");
+        msgs.add("---End chat---");
         for (int i = 0; i < repeat; i++) {
             try {
                 GetHistoryResponse g = messages.getHistory(user).peerId(id).count(count).offset(i * count).execute();
@@ -91,30 +91,18 @@ public class ParsMessages {
                 for (Message e : g.getItems()) {
                     downloadMessage(msgs, e, path);
                 }
-            } catch (Exception ex) {
+            } catch (NullPointerException npe) {
+                System.out.println("NullPointException");
+                npe.printStackTrace();
+            }catch (Exception ex) {
                 System.out.println("Some error:");
                 ex.printStackTrace();
                 smallSleep();
                 i--;
             }
         }
-        msgs.add("---Начало чата---");
-        try {
-            File textFile = new File(path + "chatText.txt");
-            FileUtils.touch(textFile);
-            if (textFile.createNewFile() || textFile.exists()) {
-                try (FileWriter fw = new FileWriter(textFile)) {
-                    for (String text : msgs) {
-                        fw.append(text).append("\n");
-                    }
-                }
-            } else {
-                throw new Exception("File cannot create. " + path + "chatText.txt");
-            }
-        } catch (Exception e) {
-            System.out.println("SOMETHING WRONG");
-            e.printStackTrace();
-        }
+        msgs.add("---Start chat---");
+        writeText(path + "chatText", msgs);
     }
 
     private static void downloadMessage(List<String> msgs, Message e, String path) {
@@ -132,8 +120,12 @@ public class ParsMessages {
                 String video_name = "video_" + video_counter + "_" + attach.getVideo().getTitle();
                 msgs.add("(" + video_name + ")");
                 msgs.add("link: " + attach.getVideo().getPlayer());
-                if (download_video.equals("1"))
-                    downloadFile(attach.getVideo().getPlayer().toString(), path + "videos\\" + video_name, ".mp3");
+                if (download_video.equals("1")) {
+                    System.out.println(video_name);
+                    System.out.println(attach.getVideo().getPlayer());
+//                    downloadFile(attach.getVideo().getPlayer().toString(), path + "videos\\" + video_name, "");
+                }
+                video_counter++;
             } else if (attach.getAudioMessage() != null) {
                 msgs.add("(audio_message_" + audio_message_counter + ")");
                 if (download_audio_message.equals("1"))
@@ -182,8 +174,12 @@ public class ParsMessages {
                 String video_name = "video_" + video_counter + "_" + attach.getVideo().getTitle();
                 msgs.add("(" + video_name + ")");
                 msgs.add("link: " + attach.getVideo().getPlayer());
-                if (download_video.equals("1"))
-                    downloadFile(attach.getVideo().getPlayer().toString(), path + "videos\\" + video_name, ".mp3");
+                if (download_video.equals("1")) {
+                    System.out.println(video_name);
+                    System.out.println(attach.getVideo().getPlayer());
+//                    downloadFile(attach.getVideo().getPlayer().toString(), path + "videos\\" + video_name, "");
+                }
+                video_counter++;
             } else if (attach.getAudioMessage() != null) {
                 msgs.add("(audio_message_" + audio_message_counter + ")");
                 if (download_audio_message.equals("1"))
@@ -215,6 +211,25 @@ public class ParsMessages {
                 downloadMessage(msgs, m, path);
                 msgs.add("<---");
             }
+    }
+
+    public static void writeText(String path, List<String> list) {
+        try {
+            File textFile = new File(path + ".txt");
+            FileUtils.touch(textFile);
+            if (textFile.createNewFile() || textFile.exists()) {
+                try (FileWriter fw = new FileWriter(textFile)) {
+                    for (String s : list) {
+                        fw.append(s).append("\n");
+                    }
+                }
+            } else {
+                throw new Exception("Can't create file. " + path + ".txt");
+            }
+        } catch (Exception e) {
+            System.out.println("SOMETHING WRONG");
+            e.printStackTrace();
+        }
     }
 
     public static void downloadFile(String fileUrl, String outputPath) {

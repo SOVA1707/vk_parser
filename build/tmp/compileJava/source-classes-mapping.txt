@@ -6,9 +6,15 @@ ru/scam/parser/ParsAlbums.java
  ru.scam.parser.ParsAlbums
 ru/scam/parser/RestoreFunctions.java
  ru.scam.parser.RestoreFunctions
-ru/scam/parser/main.java
- ru.scam.parser.main
-ru/scam/parser/ParsMessages.java
- ru.scam.parser.ParsMessages
+ru/scam/parser/calc/Calc.java
+ ru.scam.parser.calc.Calc
 ru/scam/parser/ParsFriends.java
  ru.scam.parser.ParsFriends
+ru/scam/parser/ParsMessages.java
+ ru.scam.parser.ParsMessages
+ru/scam/parser/calc/Tool.java
+ ru.scam.parser.calc.Tool
+ru/scam/parser/FarmCoin.java
+ ru.scam.parser.FarmCoin
+ru/scam/parser/main.java
+ ru.scam.parser.main

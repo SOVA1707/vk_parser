@@ -1,8 +1,6 @@
 package ru.scam.parser;
 
 import com.vk.api.sdk.actions.Messages;
-import com.vk.api.sdk.client.VkApiClient;
-import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.messages.*;
@@ -17,12 +15,10 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static ru.scam.parser.main.*;
+
 public class ParsMessages {
-    final static VkApiClient vk = main.vk;
-    final static UserActor user = main.user;
-    final static int count = main.count;
-    final static int repeat = main.repeat;
-    final static String folder_path = main.folder_path + "chats\\";
+    final static String folder_path = main.FOLDER_PATH + "chats\\";
     public static String download_images = "1";
     public static String download_video = "0";
     public static String download_audio = "0";
@@ -30,14 +26,13 @@ public class ParsMessages {
     public static String download_document = "1";
 
 
-    public static void parsMessages(int skip){
-
+    public static void parsMessages(int skip) {
         Messages messages = new Messages(vk);
 
         Set<Integer> messageIds = new HashSet<>();
-        for (int i = 0; i < repeat; i++) {
+        for (int i = 0; i < REPEAT; i++) {
             try {
-                List<ConversationWithMessage> gg = messages.getConversations(user).offset(i * count).count(count).execute().getItems();
+                List<ConversationWithMessage> gg = messages.getConversations(user).offset(i * COUNT).count(COUNT).execute().getItems();
                 gg.forEach(e -> messageIds.add(e.getConversation().getPeer().getId()));
                 if (gg.size() == 0) break;
             } catch (ApiException | ClientException e) {
@@ -81,12 +76,12 @@ public class ParsMessages {
         call_counter = 1;
     }
 
-    public static void downloadChat(Messages messages, int id, String path){
+    public static void downloadChat(Messages messages, int id, String path) {
         List<String> msgs = new ArrayList<>();
         msgs.add("---End chat---");
-        for (int i = 0; i < repeat; i++) {
+        for (int i = 0; i < REPEAT; i++) {
             try {
-                GetHistoryResponse g = messages.getHistory(user).peerId(id).count(count).offset(i * count).execute();
+                GetHistoryResponse g = messages.getHistory(user).peerId(id).count(COUNT).offset(i * COUNT).execute();
                 if (g.getItems().size() == 0) break;
                 for (Message e : g.getItems()) {
                     downloadMessage(msgs, e, path);
@@ -94,7 +89,7 @@ public class ParsMessages {
             } catch (NullPointerException npe) {
                 System.out.println("NullPointException");
                 npe.printStackTrace();
-            }catch (Exception ex) {
+            } catch (Exception ex) {
                 System.out.println("Some error:");
                 ex.printStackTrace();
                 smallSleep();

@@ -1,18 +1,16 @@
 package ru.scam.parser;
 
 import com.vk.api.sdk.actions.Docs;
-import com.vk.api.sdk.client.VkApiClient;
-import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.docs.Doc;
 
-public class ParsDocs {
-    final static VkApiClient vk = main.vk;
-    final static UserActor user = main.user;
-    final static String folder_path = main.folder_path + "docs\\";
+import static ru.scam.parser.main.*;
 
-    public static void parsDocs(){
+public class ParsDocs {
+    final static String folder_path = main.FOLDER_PATH + "docs\\";
+
+    public static void parsDocs() {
         Docs docs = new Docs(vk);
         System.out.println("---Parse docs---");
         try {

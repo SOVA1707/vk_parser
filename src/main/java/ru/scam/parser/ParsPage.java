@@ -1,8 +1,6 @@
 package ru.scam.parser;
 
 import com.vk.api.sdk.actions.Users;
-import com.vk.api.sdk.client.VkApiClient;
-import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.users.Fields;
@@ -11,9 +9,9 @@ import com.vk.api.sdk.objects.users.responses.GetResponse;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ru.scam.parser.main.*;
+
 public class ParsPage {
-    final static VkApiClient vk = main.vk;
-    final static UserActor user = main.user;
 
     public static void parseUser(String path, String id) {
         List<Fields> fields = new ArrayList<>();

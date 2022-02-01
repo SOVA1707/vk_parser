@@ -49,27 +49,45 @@ public class FarmCoin {
     private static void startFarm(int id) {
         String path = FARM_PATH + "img.jpg";
         int SLEEP = 1000;
+        int coin_income = 0;
+        int xp_income = 0;
         while(true) {
             try {
-                List<Message> items = MESSAGES.getHistory(user).peerId(id).count(3).execute().getItems();
-                MessageAttachment ma = items.get(0).getAttachments().get(0);
-                if (ma.getPhoto() != null) {
-                    File f = new File(path);
-                    if (f.exists()) FileUtils.deleteQuietly(f);
-                    ParsMessages.downloadFile(ParsMessages.getMaxSizeUrl(ParsMessages.getUrls(ma.toString())), path, "");
-                    String ans = Tool.getEquationFromImage(path);
-                    ans = ans.substring(0, ans.indexOf("."));
-                    System.out.println("answer: " + ans);
-                    MESSAGES.send(user).message(ans).randomId((int) System.nanoTime()).peerId(id).execute();
-                    System.out.println("send answer");
-                    Thread.sleep(SLEEP);
+                Message item = MESSAGES.getHistory(user).peerId(id).count(1).execute().getItems().get(0);
+                String t = item.getText();
+                if (t.contains("Coin")) {
+                    coin_income += Integer.parseInt(t.substring(t.indexOf("Вы получили ") + 12, t.indexOf(" VK Coin")));
+                    xp_income += Integer.parseInt(t.substring(t.indexOf("Coin и ") + 7, t.indexOf(" очка опыта")));
+                    System.out.println("Coin income: " + coin_income);
+                    System.out.println("XP income: " + xp_income);
                     System.out.println("request new image");
                     MESSAGES.send(user).message("Ур. 4").payload("{\"action\":\"level\",\"level\":4}").randomId((int) System.nanoTime()).peerId(id).execute();
                     Thread.sleep(SLEEP);
                 }
+                List<MessageAttachment> as = item.getAttachments();
+                if (as.size() > 0) {
+                    MessageAttachment ma = as.get(0);
+                    if (ma.getPhoto() != null) {
+                        File f = new File(path);
+                        if (f.exists()) FileUtils.deleteQuietly(f);
+                        ParsMessages.downloadFile(ParsMessages.getMaxSizeUrl(ParsMessages.getUrls(ma.toString())), path, "");
+                        String ans = Tool.getEquationFromImage(path);
+                        ans = ans.substring(0, ans.indexOf("."));
+                        System.out.println("answer: " + ans);
+                        MESSAGES.send(user).message(ans).randomId((int) System.nanoTime()).peerId(id).execute();
+                        System.out.println("send answer");
+                        Thread.sleep(SLEEP);
+                    }
+                }
             } catch (ApiException | ClientException | InterruptedException e) {
                 e.printStackTrace();
-                ParsMessages.smallSleep();
+                try {
+                    Thread.sleep(30000);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

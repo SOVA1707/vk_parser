@@ -287,6 +287,27 @@ public class ParsMessages {
         return list;
     }
 
+    public static void bigSleep() {
+        try {
+            System.out.println("Sleeping for 60 minutes...");
+            Thread.sleep(600000);
+            System.out.println("Remaining 50 minutes...");
+            Thread.sleep(600000);
+            System.out.println("Remaining 40 minutes...");
+            Thread.sleep(600000);
+            System.out.println("Remaining 30 minutes...");
+            Thread.sleep(600000);
+            System.out.println("Remaining 20 minutes...");
+            Thread.sleep(600000);
+            System.out.println("Remaining 10 minutes...");
+            Thread.sleep(600000);
+            System.out.println("Remaining 0 minutes...");
+        } catch (InterruptedException e) {
+            System.out.println("Thread sleep error");
+            e.printStackTrace();
+        }
+    }
+
     public static void sleep() {
         try {
             System.out.println("Sleeping for 15 minutes...");
@@ -295,7 +316,7 @@ public class ParsMessages {
             Thread.sleep(300000);
             System.out.println("Remaining 5 minutes...");
             Thread.sleep(300000);
-            System.out.println("Repeat...");
+            System.out.println("Remaining 0 minutes...");
         } catch (InterruptedException e) {
             System.out.println("Thread sleep error");
             e.printStackTrace();
@@ -306,7 +327,18 @@ public class ParsMessages {
         try {
             System.out.println("Sleeping for 5 minutes...");
             Thread.sleep(300000);
-            System.out.println("Repeat...");
+            System.out.println("Remaining 0 minutes...");
+        } catch (InterruptedException e) {
+            System.out.println("Thread sleep error");
+            e.printStackTrace();
+        }
+    }
+
+    public static void tinySleep() {
+        try {
+            System.out.println("Sleeping for 45 seconds...");
+            Thread.sleep(45000);
+            System.out.println("Remaining 0 seconds...");
         } catch (InterruptedException e) {
             System.out.println("Thread sleep error");
             e.printStackTrace();

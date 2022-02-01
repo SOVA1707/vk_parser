@@ -25,7 +25,7 @@ public class FarmCoin {
                 gg.forEach(e -> {
                     try {
                         int id = e.getConversation().getPeer().getId();
-                        List<Message> items = MESSAGES.getHistory(user).peerId(id).count(1).execute().getItems();
+                        List<Message> items = MESSAGES.getHistory(user).peerId(id).count(5).execute().getItems();
                         for (Message ms : items) {
                             if (ms.getText().contains("Решите пример:")) {
                                 System.out.println("desired id: " + id);
@@ -48,7 +48,7 @@ public class FarmCoin {
 
     private static void startFarm(int id) {
         String path = FARM_PATH + "img.jpg";
-        int SLEEP = 1000;
+        int SLEEP = 5000;
         int coin_income = 0;
         int xp_income = 0;
         while(true) {
@@ -60,9 +60,6 @@ public class FarmCoin {
                     xp_income += Integer.parseInt(t.substring(t.indexOf("Coin и ") + 7, t.indexOf(" очка опыта")));
                     System.out.println("Coin income: " + coin_income);
                     System.out.println("XP income: " + xp_income);
-                    System.out.println("request new image");
-                    MESSAGES.send(user).message("Ур. 4").payload("{\"action\":\"level\",\"level\":4}").randomId((int) System.nanoTime()).peerId(id).execute();
-                    Thread.sleep(SLEEP);
                 }
                 List<MessageAttachment> as = item.getAttachments();
                 if (as.size() > 0) {
@@ -78,16 +75,17 @@ public class FarmCoin {
                         System.out.println("send answer");
                         Thread.sleep(SLEEP);
                     }
+                }else {
+                    System.out.println("request new image");
+                    MESSAGES.send(user).message("Ур. 4").payload("{\"action\":\"level\",\"level\":4}").randomId((int) System.nanoTime()).peerId(id).execute();
+                    Thread.sleep(SLEEP);
                 }
             } catch (ApiException | ClientException | InterruptedException e) {
                 e.printStackTrace();
-                try {
-                    Thread.sleep(30000);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
+                ParsMessages.tinySleep();
             } catch (Exception e) {
                 e.printStackTrace();
+                ParsMessages.bigSleep();
             }
         }
     }

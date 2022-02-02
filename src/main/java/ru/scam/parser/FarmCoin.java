@@ -1,6 +1,7 @@
 package ru.scam.parser;
 
 import com.vk.api.sdk.actions.Messages;
+import com.vk.api.sdk.exceptions.ApiCaptchaException;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.messages.ConversationWithMessage;
@@ -55,7 +56,7 @@ public class FarmCoin {
         int coin_income = 0;
         int xp_income = 0;
         while(flag) {
-            int SLEEP = (int) (5000 + Math.random()*3000);
+            int SLEEP = (int) (2000 + Math.random()*3000);
             try {
                 Message message = MESSAGES.getHistory(user).peerId(id).count(1).execute().getItems().get(0);
                 String t = message.getText();
@@ -89,7 +90,6 @@ public class FarmCoin {
                     Thread.sleep(SLEEP);
                 }
             } catch (ApiException | ClientException | InterruptedException e) {
-                e.printStackTrace();
                 ParsMessages.smallSleep();
             } catch (Exception e) {
                 e.printStackTrace();

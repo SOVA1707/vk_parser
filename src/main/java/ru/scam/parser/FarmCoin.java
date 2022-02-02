@@ -17,8 +17,7 @@ import static ru.scam.parser.main.*;
 public class FarmCoin {
     private static final Messages MESSAGES = new Messages(vk);
 
-    public static void Farm() {
-
+    public static void Farm(int level) {
         for (int i = 0; i < REPEAT; i++) {
             try {
                 List<ConversationWithMessage> gg = MESSAGES.getConversations(user).offset(i * COUNT).count(COUNT).execute().getItems();
@@ -27,9 +26,9 @@ public class FarmCoin {
                         int id = e.getConversation().getPeer().getId();
                         List<Message> items = MESSAGES.getHistory(user).peerId(id).count(5).execute().getItems();
                         for (Message ms : items) {
-                            if (ms.getText().contains("Решите пример:")) {
+                            if (ms.getText().contains("Решите пример")) {
                                 System.out.println("desired id: " + id);
-                                startFarm(id);
+                                startFarm(id, level);
                                 break;
                             }
                         }
@@ -46,20 +45,25 @@ public class FarmCoin {
         }
     }
 
-    private static void startFarm(int id) {
+    public static void endFarm() {
+        flag = false;
+    }
+
+    private static boolean flag = true;
+    private static void startFarm(int id, int level) {
         String path = FARM_PATH + "img.jpg";
         int coin_income = 0;
         int xp_income = 0;
-        while(true) {
+        while(flag) {
             int SLEEP = (int) (5000 + Math.random()*3000);
             try {
                 Message message = MESSAGES.getHistory(user).peerId(id).count(1).execute().getItems().get(0);
                 String t = message.getText();
                 if (t.contains("Coin")) {
                     coin_income += Integer.parseInt(t.substring(t.indexOf("Вы получили ") + 12, t.indexOf(" VK Coin")));
-                    xp_income += Integer.parseInt(t.substring(t.indexOf("Coin и ") + 7, t.indexOf(" очка опыта")));
-                    System.out.println("Coin income: " + coin_income);
-                    System.out.println("XP income: " + xp_income);
+                    xp_income += Integer.parseInt(t.substring(t.indexOf("Coin и ") + 7, t.indexOf("опыта") - 7));
+                    System.out.println("~Coin income: " + coin_income + "~");
+                    System.out.println("~XP income: " + xp_income + "~");
                 }
                 List<MessageAttachment> as = message.getAttachments();
                 if (as.size() > 0) {
@@ -68,16 +72,20 @@ public class FarmCoin {
                         File f = new File(path);
                         if (f.exists()) FileUtils.deleteQuietly(f);
                         ParsMessages.downloadFile(ParsMessages.getMaxSizeUrl(ParsMessages.getUrls(ma.toString())), path, "");
-                        String ans = Tool.getEquationFromImage(path);
-                        ans = ans.substring(0, ans.indexOf("."));
-                        System.out.println("answer: " + ans);
+                        String ans;
+                        if (level > 10) {
+                            ans = Tool.getFractionalFromImage(path);
+                        }else {
+                            ans = Tool.getEquationFromImage(path);
+                        }
+                        if (ans.contains(".")) ans = ans.substring(0, ans.indexOf("."));
+                        System.out.println("Send answer: " + ans);
                         MESSAGES.send(user).message(ans).randomId((int) System.nanoTime()).peerId(id).execute();
-                        System.out.println("send answer");
                         Thread.sleep(SLEEP);
                     }
                 }else {
                     System.out.println("request new image");
-                    MESSAGES.send(user).message("Ур. 4").payload("{\"action\":\"level\",\"level\":4}").randomId((int) System.nanoTime()).peerId(id).execute();
+                    MESSAGES.send(user).message("Ур. " + level).payload("{\"action\":\"level\",\"level\":" + level + "}").randomId((int) System.nanoTime()).peerId(id).execute();
                     Thread.sleep(SLEEP);
                 }
             } catch (ApiException | ClientException | InterruptedException e) {
@@ -85,7 +93,7 @@ public class FarmCoin {
                 ParsMessages.smallSleep();
             } catch (Exception e) {
                 e.printStackTrace();
-                ParsMessages.bigSleep();
+                ParsMessages.tinySleep();
             }
         }
     }

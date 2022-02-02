@@ -26,7 +26,7 @@ public class main {
 
 //        Parse(args);
 
-        FarmCoin.Farm();
+        FarmCoin.Farm(12);
 
     }
 
@@ -38,7 +38,6 @@ public class main {
         if (args.length > 2) {
             token = args[1];
             userId = Integer.parseInt(args[2]);
-
         }
 
         ParsMessages.parsMessages(skip);

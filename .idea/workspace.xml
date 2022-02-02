@@ -4,14 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="34b575ca-a985-4f3a-8f06-33b1dccfb2c7" name="Default Changelist" comment="commit all">
-      <change beforePath="$PROJECT_DIR$/.gradle/7.0/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
+    <list default="true" id="34b575ca-a985-4f3a-8f06-33b1dccfb2c7" name="Default Changelist" comment="fix time">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/scam/parser/calc/Rational.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pack/2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pack/3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pack/4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pack/5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pack/6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pack/7.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.0/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.0/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ru/scam/parser/FarmCoin.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ru/scam/parser/FarmCoin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ru/scam/parser/ParsMessages.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ru/scam/parser/ParsMessages.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ru/scam/parser/calc/Tool.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ru/scam/parser/calc/Tool.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ru/scam/parser/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ru/scam/parser/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/scam/parser/FarmCoin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/scam/parser/FarmCoin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/scam/parser/ParsMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/scam/parser/ParsMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/scam/parser/calc/Tool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/scam/parser/calc/Tool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/scam/parser/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/scam/parser/main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +88,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -288,7 +306,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643776210190</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fix time">
+      <created>1643776914973</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1643776914973</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -306,9 +331,11 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="add exceptions" />
     <MESSAGE value="add skip in messages" />
     <MESSAGE value="commit all" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit all" />
+    <MESSAGE value="fix time" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix time" />
   </component>
 </project>

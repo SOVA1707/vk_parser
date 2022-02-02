@@ -303,7 +303,7 @@ public class ParsMessages {
             Thread.sleep(600000);
             System.out.println("Remaining 10 minutes...");
             Thread.sleep(600000);
-            System.out.println("Remaining 0 minutes...");
+            printContinue();
         } catch (InterruptedException e) {
             System.out.println("Thread sleep error");
             e.printStackTrace();
@@ -319,7 +319,7 @@ public class ParsMessages {
             Thread.sleep(300000);
             System.out.println("Remaining 5 minutes...");
             Thread.sleep(300000);
-            System.out.println("Remaining 0 minutes...");
+            printContinue();
         } catch (InterruptedException e) {
             System.out.println("Thread sleep error");
             e.printStackTrace();
@@ -331,7 +331,7 @@ public class ParsMessages {
             printTime();
             System.out.println("Sleeping for 5 minutes...");
             Thread.sleep(300000);
-            System.out.println("Remaining 0 minutes...");
+            printContinue();
         } catch (InterruptedException e) {
             System.out.println("Thread sleep error");
             e.printStackTrace();
@@ -343,7 +343,7 @@ public class ParsMessages {
             printTime();
             System.out.println("Sleeping for 45 seconds...");
             Thread.sleep(45000);
-            System.out.println("Remaining 0 seconds...");
+            printContinue();
         } catch (InterruptedException e) {
             System.out.println("Thread sleep error");
             e.printStackTrace();
@@ -359,5 +359,9 @@ public class ParsMessages {
     private static void printTime() {
         System.out.println("TIME: " + df.format(new Date(System.currentTimeMillis())));
 
+    }
+
+    private static void printContinue() {
+        System.out.println("Continue...");
     }
 }

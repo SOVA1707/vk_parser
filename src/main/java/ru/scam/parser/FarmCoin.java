@@ -48,20 +48,20 @@ public class FarmCoin {
 
     private static void startFarm(int id) {
         String path = FARM_PATH + "img.jpg";
-        int SLEEP = 5000;
         int coin_income = 0;
         int xp_income = 0;
         while(true) {
+            int SLEEP = (int) (5000 + Math.random()*3000);
             try {
-                Message item = MESSAGES.getHistory(user).peerId(id).count(1).execute().getItems().get(0);
-                String t = item.getText();
+                Message message = MESSAGES.getHistory(user).peerId(id).count(1).execute().getItems().get(0);
+                String t = message.getText();
                 if (t.contains("Coin")) {
                     coin_income += Integer.parseInt(t.substring(t.indexOf("Вы получили ") + 12, t.indexOf(" VK Coin")));
                     xp_income += Integer.parseInt(t.substring(t.indexOf("Coin и ") + 7, t.indexOf(" очка опыта")));
                     System.out.println("Coin income: " + coin_income);
                     System.out.println("XP income: " + xp_income);
                 }
-                List<MessageAttachment> as = item.getAttachments();
+                List<MessageAttachment> as = message.getAttachments();
                 if (as.size() > 0) {
                     MessageAttachment ma = as.get(0);
                     if (ma.getPhoto() != null) {
@@ -82,7 +82,7 @@ public class FarmCoin {
                 }
             } catch (ApiException | ClientException | InterruptedException e) {
                 e.printStackTrace();
-                ParsMessages.tinySleep();
+                ParsMessages.smallSleep();
             } catch (Exception e) {
                 e.printStackTrace();
                 ParsMessages.bigSleep();

@@ -12,13 +12,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.0/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.0/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/vk_parser-1.4-all.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/vk_parser-1.4-all.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/scripts/vk_parser" beforeDir="false" afterPath="$PROJECT_DIR$/build/scripts/vk_parser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/scripts/vk_parser.bat" beforeDir="false" afterPath="$PROJECT_DIR$/build/scripts/vk_parser.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ru/scam/parser/ParsMessages.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ru/scam/parser/ParsMessages.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/scam/parser/FarmCoin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/scam/parser/FarmCoin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/scam/parser/ParsMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/scam/parser/ParsMessages.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +62,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -110,7 +109,7 @@
       <command value="gradle compileJava" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.vk_parser [shadowJar]">
+  <component name="RunManager" selected="Gradle.vk_parser [run]">
     <configuration name="vk_parser [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -218,9 +217,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.vk_parser [run]" />
         <item itemvalue="Gradle.vk_parser [shadowJar]" />
         <item itemvalue="Gradle.vk_parser [build]" />
-        <item itemvalue="Gradle.vk_parser [run]" />
         <item itemvalue="Gradle.vk_parser [compileJava]" />
         <item itemvalue="Gradle.vk_parser [init]" />
       </list>

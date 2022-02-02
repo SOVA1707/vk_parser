@@ -289,6 +289,7 @@ public class ParsMessages {
 
     public static void bigSleep() {
         try {
+            printTime();
             System.out.println("Sleeping for 60 minutes...");
             Thread.sleep(600000);
             System.out.println("Remaining 50 minutes...");
@@ -310,6 +311,7 @@ public class ParsMessages {
 
     public static void sleep() {
         try {
+            printTime();
             System.out.println("Sleeping for 15 minutes...");
             Thread.sleep(300000);
             System.out.println("Remaining 10 minutes...");
@@ -325,6 +327,7 @@ public class ParsMessages {
 
     public static void smallSleep() {
         try {
+            printTime();
             System.out.println("Sleeping for 5 minutes...");
             Thread.sleep(300000);
             System.out.println("Remaining 0 minutes...");
@@ -336,6 +339,7 @@ public class ParsMessages {
 
     public static void tinySleep() {
         try {
+            printTime();
             System.out.println("Sleeping for 45 seconds...");
             Thread.sleep(45000);
             System.out.println("Remaining 0 seconds...");
@@ -347,5 +351,9 @@ public class ParsMessages {
 
     public static String getMaxSizeUrl(List<String> urls) {
         return urls.get(urls.size() - 1);
+    }
+
+    private static void printTime() {
+        System.out.println("TIME: " + System.nanoTime());
     }
 }

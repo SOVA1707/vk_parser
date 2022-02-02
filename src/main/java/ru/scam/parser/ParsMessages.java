@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -353,7 +354,10 @@ public class ParsMessages {
         return urls.get(urls.size() - 1);
     }
 
+
+    private static DateFormat df = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss:SSSSSSS");
     private static void printTime() {
-        System.out.println("TIME: " + System.nanoTime());
+        System.out.println("TIME: " + df.format(new Date(System.currentTimeMillis())));
+
     }
 }

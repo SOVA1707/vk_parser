@@ -80,7 +80,7 @@ public class Rational {
         int n = this.numerator;
         int d = this.denominator;
 
-        for(int i = 2; i < this.numerator; i++){
+        for(int i = this.numerator; i > 1; i--){
             if((this.numerator % i == 0) && (this.denominator % i == 0)){
                 n = this.numerator / i;
                 d = this.denominator / i;

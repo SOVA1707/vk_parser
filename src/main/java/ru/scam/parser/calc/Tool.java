@@ -81,6 +81,14 @@ public class Tool {
             }
         }
         r1.Reduction();
+        r1.Reduction();
+        r1.Reduction();
+        r1.Reduction();
+        r1.Reduction();
+        r1.Reduction();
+        r1.Reduction();
+        r1.Reduction();
+        r1.Reduction();
 
 
         image.release();

@@ -19,6 +19,8 @@ public class FarmCoin {
     private static final Messages MESSAGES = new Messages(vk);
 
     public static void Farm(int level) {
+        Tool.loadLibraries();
+
         for (int i = 0; i < REPEAT; i++) {
             try {
                 List<ConversationWithMessage> gg = MESSAGES.getConversations(user).offset(i * COUNT).count(COUNT).execute().getItems();

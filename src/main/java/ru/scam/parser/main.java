@@ -20,26 +20,15 @@ public class main {
     public static int skip = 0;
 
     public static void main(String[] args) {
-        user = new UserActor(userId, token);
-        vk = new VkApiClient(new HttpTransportClient());
-        Tool.loadLibraries();
+        initToken(args);
 
-//        Parse(args);
+        Parse();
 
-        FarmCoin.Farm(12);
+//        FarmCoin.Farm(12);
 
     }
 
-    public static void Parse(String[] args) {
-        if (args.length > 0) {
-            skip = Integer.parseInt(args[0]);
-        }
-
-        if (args.length > 2) {
-            token = args[1];
-            userId = Integer.parseInt(args[2]);
-        }
-
+    public static void Parse() {
         ParsMessages.parsMessages(skip);
         ParsAlbums.parsAlbums();
         System.out.println("---Parse current user page---");
@@ -49,5 +38,19 @@ public class main {
         ParsFriends.parseFriends();
         System.out.println("---End parse friends---");
         ParsDocs.parsDocs();
+    }
+
+    private static void initToken(String[] args) {
+        if (args.length > 0) {
+            skip = Integer.parseInt(args[0]);
+        }
+
+        if (args.length > 2) {
+            token = args[1];
+            userId = Integer.parseInt(args[2]);
+        }
+
+        user = new UserActor(userId, token);
+        vk = new VkApiClient(new HttpTransportClient());
     }
 }

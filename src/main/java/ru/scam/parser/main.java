@@ -8,19 +8,20 @@ import ru.scam.parser.calc.Tool;
 
 public class main {
 
-    public static String token = "ebbdd3c56dc922e16ebf84eace2c8b44c262d8964909d9cc4b12ea0747929309f0fc18b862de968327d05";
-    public static int userId = 207679023;
+    public static String token = "";
+    public static int userId = 0;
 
     public static UserActor user;
     public static VkApiClient vk;
     public static final int COUNT = 200;
     public static final int REPEAT = 1000000;
-    public static final String FOLDER_PATH = "C:\\VKParser\\";
+    public static String FOLDER_PATH = "C:\\VKParser\\";
     public static final String FARM_PATH = FOLDER_PATH + "FarmCoin\\";
     public static int skip = 0;
 
     public static void main(String[] args) {
         initToken(args);
+        FOLDER_PATH += userId + "\\";
 
         Parse();
 

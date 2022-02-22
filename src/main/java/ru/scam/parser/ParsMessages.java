@@ -60,7 +60,7 @@ public class ParsMessages {
                             try {
                                 List<GetResponse> gr = users.get(user).userIds(String.valueOf(id)).fields(fields).execute();
                                 GetResponse r = gr.get(0);
-                                name = r.getFirstName() + " " + r.getLastName() + " \\ " + r.getScreenName();
+                                name = r.getFirstName() + " " + r.getLastName() + " " + r.getScreenName();
                             } catch (ApiException | ClientException ex) {
                                 ex.printStackTrace();
                             } catch (IndexOutOfBoundsException ex) {
@@ -70,7 +70,7 @@ public class ParsMessages {
                             try {
                                 List<GetByIdObjectLegacyResponse> gr = groups.getByIdObjectLegacy(user).groupId(String.valueOf(-id)).execute();
                                 GetByIdObjectLegacyResponse r = gr.get(0);
-                                name = r.getName() + " \\ " + r.getScreenName();
+                                name = r.getName() + " " + r.getScreenName();
                             } catch (ApiException | ClientException ex) {
                                 ex.printStackTrace();
                             }
@@ -93,7 +93,7 @@ public class ParsMessages {
         for (Map.Entry<Integer, String> id : messageIds.entrySet()) {
             System.out.print(i + "\t " + id);
             if (skip < i) {
-                String path = folder_path + id + " " +  id.getValue() + "\\";
+                String path = folder_path + id.getKey() + " " +  id.getValue() + "\\";
                 downloadChat(messages, id.getKey(), path);
                 refreshCounter();
                 System.out.println("...done");

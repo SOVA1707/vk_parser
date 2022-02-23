@@ -267,7 +267,14 @@ public class ParsMessages {
                 throw new Exception("Can't create file. " + path + ".txt");
             }
         } catch (IOException e) {
-            writeText(path.replaceAll("\\(.*\\)", ""), list);
+            String new_path = path.replaceAll("\\(.*\\)", "").replaceAll(" ", "");
+            try {
+                String p = path.substring(0, new_path.lastIndexOf("\\") + 1);
+                FileUtils.forceMkdir(new File(p));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            writeText(new_path, list);
         } catch (Exception e) {
             System.out.println("SOMETHING WRONG");
             e.printStackTrace();
@@ -293,8 +300,27 @@ public class ParsMessages {
         downloadFile(fileUrl, outputPath, extension.toString());
     }
 
+    private static int error_counter = 0;
+
     public static void downloadFile(String fileUrl, String outputPath, String extension) {
-        outputPath = outputPath.replaceAll("[?]", "_");
+        outputPath = outputPath.replaceAll("[?|*\"<>]", "_");
+        File f = new File(outputPath + "." + extension);
+        if (!f.exists()) {
+            try {
+                FileUtils.copyURLToFile(new URL(fileUrl), f);
+            } catch (IOException e) {
+                error_counter++;
+                System.out.println("File not found: " + fileUrl);
+                System.out.println("Try again.");
+                outputPath = outputPath.substring(0, outputPath.lastIndexOf("\\")) + "error_name_" + error_counter;
+                downloadFileAgain(fileUrl, outputPath, extension);
+            }
+        } else {
+            System.out.print(".");
+        }
+    }
+
+    private static void downloadFileAgain(String fileUrl, String outputPath, String extension) {
         File f = new File(outputPath + "." + extension);
         if (!f.exists()) {
             try {

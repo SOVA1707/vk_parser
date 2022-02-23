@@ -55,7 +55,7 @@ public class ParsMessages {
                     ChatSettings settings = e.getConversation().getChatSettings();
                     if (settings != null) {
                         name = settings.getTitle();
-                    }else {
+                    } else {
                         if (id > 0) {
                             try {
                                 List<GetResponse> gr = users.get(user).userIds(String.valueOf(id)).fields(fields).execute();
@@ -66,7 +66,7 @@ public class ParsMessages {
                             } catch (IndexOutOfBoundsException ex) {
                                 System.out.println(id);
                             }
-                        }else {
+                        } else {
                             try {
                                 List<GetByIdObjectLegacyResponse> gr = groups.getByIdObjectLegacy(user).groupId(String.valueOf(-id)).execute();
                                 GetByIdObjectLegacyResponse r = gr.get(0);
@@ -93,7 +93,7 @@ public class ParsMessages {
         for (Map.Entry<Integer, String> id : messageIds.entrySet()) {
             System.out.print(i + "\t " + id);
             if (skip < i) {
-                String path = folder_path + id.getKey() + " " +  id.getValue() + "\\";
+                String path = folder_path + id.getKey() + " " + id.getValue() + "\\";
                 downloadChat(messages, id.getKey(), path);
                 refreshCounter();
                 System.out.println("...done");
@@ -266,6 +266,8 @@ public class ParsMessages {
             } else {
                 throw new Exception("Can't create file. " + path + ".txt");
             }
+        } catch (IOException e) {
+            writeText(path.replaceAll("\\(.*\\)", ""), list);
         } catch (Exception e) {
             System.out.println("SOMETHING WRONG");
             e.printStackTrace();

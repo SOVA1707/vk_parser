@@ -312,7 +312,7 @@ public class ParsMessages {
                 error_counter++;
                 System.out.println("File not found: " + fileUrl);
                 System.out.println("Try again.");
-                outputPath = outputPath.substring(0, outputPath.lastIndexOf("\\")) + "error_name_" + error_counter;
+                outputPath = outputPath.substring(0, outputPath.lastIndexOf("\\") + 1) + "error_name_" + error_counter + extension;
                 downloadFileAgain(fileUrl, outputPath, extension);
             }
         } else {

@@ -31,8 +31,7 @@ public class ParsPage {
             List<String> list = new ArrayList<>();
             for (GetResponse r : g) {
                 String path2 = path + r.getFirstName() + " " + r.getLastName();
-                if (r.getFirstName() != null && r.getLastName() != null)
-                    list.add(r.getFirstName() + " " + r.getLastName());
+                list.add(r.getFirstName() + " " + r.getLastName());
                 if (r.getNickname() != null) list.add("(" + r.getScreenName() + ")");
                 if (r.getId() != null) list.add("Id: " + r.getId());
                 if (r.getBdate() != null) list.add("Birthday: " + r.getBdate());
@@ -57,11 +56,11 @@ public class ParsPage {
             }
 
         } catch (ApiException | ClientException e) {
-            System.out.println("Error 209...");
+//            System.out.println("Error 209...");
             String text = e.getMessage();
             if (text.contains("but was")) {
                 String remove = text.substring(text.indexOf("$[0].") + 5).toUpperCase();
-                System.out.println(remove);
+//                System.out.println(remove);
                 fields.remove(Fields.valueOf(remove));
                 parse(path, id, fields);
             }

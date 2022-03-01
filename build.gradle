@@ -21,6 +21,9 @@ shadowJar {
 }
 
 applicationDefaultJvmArgs = ['-Dfile.encoding=UTF-8', '-Djava.util.logging.config.file=logging.properties']
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
 
 dependencies {
 

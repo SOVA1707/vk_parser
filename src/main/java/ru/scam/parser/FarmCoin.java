@@ -19,6 +19,8 @@ public class FarmCoin {
     private static final Messages MESSAGES = new Messages(vk);
 
     public static void Farm(int level) {
+        Tool.loadLibraries();
+
         for (int i = 0; i < REPEAT; i++) {
             try {
                 List<ConversationWithMessage> gg = MESSAGES.getConversations(user).offset(i * COUNT).count(COUNT).execute().getItems();
@@ -51,13 +53,12 @@ public class FarmCoin {
     }
 
     private static boolean flag = true;
-
     private static void startFarm(int id, int level) {
         String path = FARM_PATH + "img.jpg";
         int coin_income = 0;
         int xp_income = 0;
-        while (flag) {
-            int SLEEP = (int) (2000 + Math.random() * 3000);
+        while(flag) {
+            int SLEEP = (int) (1900 + Math.random()*3000);
             try {
                 Message message = MESSAGES.getHistory(user).peerId(id).count(1).execute().getItems().get(0);
                 String t = message.getText();

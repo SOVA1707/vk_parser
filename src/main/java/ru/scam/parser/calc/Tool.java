@@ -85,6 +85,10 @@ public class Tool {
         r1.Reduction();
         r1.Reduction();
         r1.Reduction();
+        r1.Reduction();
+        r1.Reduction();
+        r1.Reduction();
+        r1.Reduction();
 
 
         image.release();
@@ -97,7 +101,7 @@ public class Tool {
 
 
 
-    private static final Mat img = Imgcodecs.imread("C:\\Users\\SamoilovNA\\IdeaProjects\\vk_parser\\src\\main\\resources\\pack\\1.jpg", Imgcodecs.IMREAD_GRAYSCALE);
+    private static final Mat img = Imgcodecs.imread(main.FARM_PATH + "1.jpg", Imgcodecs.IMREAD_GRAYSCALE);
     private static final List<Mat> letters = new ArrayList<>();
 
     static {

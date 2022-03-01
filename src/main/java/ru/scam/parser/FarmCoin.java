@@ -1,9 +1,17 @@
 package ru.scam.parser;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import com.vk.api.sdk.actions.Messages;
+import com.vk.api.sdk.client.ApiRequest;
 import com.vk.api.sdk.exceptions.ApiCaptchaException;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
+import com.vk.api.sdk.objects.base.Error;
+import com.vk.api.sdk.objects.base.RequestParam;
 import com.vk.api.sdk.objects.messages.ConversationWithMessage;
 import com.vk.api.sdk.objects.messages.Message;
 import com.vk.api.sdk.objects.messages.MessageAttachment;
@@ -11,7 +19,10 @@ import org.apache.commons.io.FileUtils;
 import ru.scam.parser.calc.Tool;
 
 import java.io.File;
+import java.io.StringReader;
 import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 import static ru.scam.parser.main.*;
 
@@ -23,7 +34,9 @@ public class FarmCoin {
 
         for (int i = 0; i < REPEAT; i++) {
             try {
-                List<ConversationWithMessage> gg = MESSAGES.getConversations(user).offset(i * COUNT).count(COUNT).execute().getItems();
+                List<ConversationWithMessage> gg = MESSAGES.getConversations(user).
+                        offset(i * COUNT).count(COUNT).
+                        execute().getItems();
                 gg.forEach(e -> {
                     try {
                         int id = e.getConversation().getPeer().getId();
@@ -58,7 +71,7 @@ public class FarmCoin {
         int coin_income = 0;
         int xp_income = 0;
         while(flag) {
-            int SLEEP = (int) (1900 + Math.random()*3000);
+            int SLEEP = (int) (0);
             try {
                 Message message = MESSAGES.getHistory(user).peerId(id).count(1).execute().getItems().get(0);
                 String t = message.getText();
@@ -93,7 +106,11 @@ public class FarmCoin {
                 }
             } catch (ApiException e) {
                 if (e.toString().contains("Captcha needed")) {
-                    computeCaptcha((ApiCaptchaException) e);
+                    try {
+                        computeCaptcha(id);
+                    } catch (ClientException | ApiException ex) {
+                        ex.printStackTrace();
+                    }
                     ParsMessages.tinySleep();
                 } else {
                     ParsMessages.smallSleep();
@@ -107,7 +124,33 @@ public class FarmCoin {
         }
     }
 
-    public static void computeCaptcha(ApiCaptchaException e) {
-        System.out.println(e.getMessage());
+    public static void computeCaptcha(int id) throws ClientException, ApiException {
+        System.out.println("----------");
+
+        ApiRequest<Integer> r = MESSAGES.send(user).message(".").randomId((int) System.nanoTime()).peerId(100);
+
+        String textResponse = r.executeAsString();
+        JsonReader jsonReader = new JsonReader(new StringReader(textResponse));
+        JsonObject json = (JsonObject) new JsonParser().parse(jsonReader);
+        JsonObject jsonError = json.getAsJsonObject("error");
+
+        String captcha_sid = String.valueOf(jsonError.getAsJsonPrimitive("captcha_sid"));
+        String sid = captcha_sid.substring(1, captcha_sid.lastIndexOf("\""));
+        String captcha_img = String.valueOf(jsonError.getAsJsonPrimitive("captcha_img"));
+        String img = captcha_img.substring(1, captcha_img.lastIndexOf("\""));
+
+        System.out.println(sid);
+        System.out.println(img);
+
+        String key = getCaptchaKey(img);
+
+        MESSAGES.send(user).message(".").randomId((int) System.nanoTime()).peerId(id).captchaKey(key).captchaSid(sid).execute();
+    }
+
+    private static String getCaptchaKey(String img) {
+        ParsMessages.downloadFile(img, FARM_PATH);
+        Scanner sc = new Scanner(System.in);
+        String answer = sc.nextLine();
+        return answer;
     }
 }

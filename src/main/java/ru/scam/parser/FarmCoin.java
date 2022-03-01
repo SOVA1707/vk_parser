@@ -51,12 +51,13 @@ public class FarmCoin {
     }
 
     private static boolean flag = true;
+
     private static void startFarm(int id, int level) {
         String path = FARM_PATH + "img.jpg";
         int coin_income = 0;
         int xp_income = 0;
-        while(flag) {
-            int SLEEP = (int) (2000 + Math.random()*3000);
+        while (flag) {
+            int SLEEP = (int) (2000 + Math.random() * 3000);
             try {
                 Message message = MESSAGES.getHistory(user).peerId(id).count(1).execute().getItems().get(0);
                 String t = message.getText();
@@ -76,7 +77,7 @@ public class FarmCoin {
                         String ans;
                         if (level > 10) {
                             ans = Tool.getFractionalFromImage(path);
-                        }else {
+                        } else {
                             ans = Tool.getEquationFromImage(path);
                         }
                         if (ans.contains(".")) ans = ans.substring(0, ans.indexOf("."));
@@ -84,17 +85,28 @@ public class FarmCoin {
                         MESSAGES.send(user).message(ans).randomId((int) System.nanoTime()).peerId(id).execute();
                         Thread.sleep(SLEEP);
                     }
-                }else {
+                } else {
                     System.out.println("request new image");
                     MESSAGES.send(user).message("Ур. " + level).payload("{\"action\":\"level\",\"level\":" + level + "}").randomId((int) System.nanoTime()).peerId(id).execute();
                     Thread.sleep(SLEEP);
                 }
-            } catch (ApiException | ClientException | InterruptedException e) {
+            } catch (ApiException e) {
+                if (e.toString().contains("Captcha needed")) {
+                    computeCaptcha((ApiCaptchaException) e);
+                    ParsMessages.tinySleep();
+                } else {
+                    ParsMessages.smallSleep();
+                }
+            } catch (ClientException | InterruptedException e) {
                 ParsMessages.smallSleep();
             } catch (Exception e) {
                 e.printStackTrace();
                 ParsMessages.tinySleep();
             }
         }
+    }
+
+    public static void computeCaptcha(ApiCaptchaException e) {
+        System.out.println(e.getMessage());
     }
 }

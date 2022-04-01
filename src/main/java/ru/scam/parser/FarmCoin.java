@@ -77,7 +77,7 @@ public class FarmCoin {
                         String ans;
                         if (level > 10) {
                             ans = Tool.getFractionalFromImage(path);
-                        }else {
+                        } else {
                             ans = Tool.getEquationFromImage(path);
                         }
                         if (ans.contains(".")) ans = ans.substring(0, ans.indexOf("."));
@@ -85,7 +85,7 @@ public class FarmCoin {
                         MESSAGES.send(user).message(ans).randomId((int) System.nanoTime()).peerId(id).execute();
                         Thread.sleep(SLEEP);
                     }
-                }else {
+                } else {
                     System.out.println("request new image");
                     MESSAGES.send(user).message("Ур. " + level).payload("{\"action\":\"level\",\"level\":" + level + "}").randomId((int) System.nanoTime()).peerId(id).execute();
                     Thread.sleep(SLEEP);

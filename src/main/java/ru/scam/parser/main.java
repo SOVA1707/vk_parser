@@ -7,8 +7,8 @@ import com.vk.api.sdk.httpclient.HttpTransportClient;
 
 public class main {
 
-    public static String token = "";
-    public static int userId = 0;
+    public static String token = "ebbdd3c56dc922e16ebf84eace2c8b44c262d8964909d9cc4b12ea0747929309f0fc18b862de968327d05";
+    public static int userId = 207679023;
 
     public static UserActor user;
     public static VkApiClient vk;
@@ -22,9 +22,9 @@ public class main {
         initToken(args);
         FOLDER_PATH += userId + "\\";
 
-        Parse();
+//        Parse();
 
-//        FarmCoin.Farm(12);
+        FarmCoin.Farm(12);
 
     }
 

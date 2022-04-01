@@ -5,14 +5,11 @@ import com.vk.api.sdk.actions.Messages;
 import com.vk.api.sdk.actions.Users;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
-import com.vk.api.sdk.objects.groups.responses.GetAddressesResponse;
 import com.vk.api.sdk.objects.groups.responses.GetByIdObjectLegacyResponse;
-import com.vk.api.sdk.objects.groups.responses.GetSettingsResponse;
 import com.vk.api.sdk.objects.messages.*;
 import com.vk.api.sdk.objects.messages.responses.GetHistoryResponse;
 import com.vk.api.sdk.objects.users.Fields;
 import com.vk.api.sdk.objects.users.responses.GetResponse;
-import com.vk.api.sdk.queries.groups.GroupsGetSettingsQuery;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;

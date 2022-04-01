@@ -3,7 +3,6 @@ package ru.scam.parser;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
-import ru.scam.parser.calc.Tool;
 
 
 public class main {
